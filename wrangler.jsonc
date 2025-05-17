@@ -12,7 +12,13 @@
 	"pages_build_output_dir": ".vercel/output/static",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [{
+    "binding": "DB",
+    "database_name": "digest",
+    "database_id": "d4c8c50e-999c-4f7f-a3a1-a19e6ae99ce1",
+	"migrations_dir": "./src/server/db/migrations",
+ 	}]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
