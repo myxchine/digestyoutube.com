@@ -16,9 +16,7 @@ export async function createSummarisedVideo(input: {
   channelId: string;
   timeToGenerateSummary: number;
 }) {
-  return await (
-    await db
-  )
+  return await db()
     .insert(video)
     .values({
       ...input,
@@ -27,14 +25,12 @@ export async function createSummarisedVideo(input: {
 }
 
 export async function deleteSummarisedVideo(videoId: string) {
-  return await (await db).delete(video).where(eq(video.id, videoId));
+  return await db().delete(video).where(eq(video.id, videoId));
 }
 export async function createChannel(input: {
   channel: { name: string; id: string; imageUrl: string | null };
 }) {
-  return await (
-    await db
-  )
+  return await db()
     .insert(channel)
     .values({
       ...input.channel,

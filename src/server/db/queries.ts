@@ -12,13 +12,13 @@ export const QUERIES = {
     page?: number;
   }) {
     if (page === undefined) {
-      return (await db)
+      return db()
         .select()
         .from(video)
         .limit(limit)
         .orderBy(desc(video.createdAt));
     }
-    return (await db)
+    return db()
       .select()
       .from(video)
       .limit(limit)
@@ -36,7 +36,7 @@ export const QUERIES = {
     page: number | undefined;
   }) {
     if (page === undefined) {
-      const rows = await (await db)
+      const rows = await db()
         .select()
         .from(channel)
         .leftJoin(video, eq(video.channelId, channel.id))
@@ -55,9 +55,7 @@ export const QUERIES = {
         video: channelvideo,
       };
     }
-    const rows = await (
-      await db
-    )
+    const rows = await db()
       .select()
       .from(channel)
       .leftJoin(video, eq(video.channelId, channel.id))
@@ -80,7 +78,7 @@ export const QUERIES = {
   getSummarisedVideoById: async function (
     videoId: string
   ): Promise<SummarisedVideo | null> {
-    const rawvideo = await (await db)
+    const rawvideo = await db()
       .select()
       .from(video)
       .where(eq(video.id, videoId));
@@ -98,16 +96,14 @@ export const QUERIES = {
     page?: number;
   }) {
     if (page === undefined) {
-      const rows = await (await db)
+      const rows = await db()
         .select()
         .from(channel)
         .orderBy(asc(channel.name))
         .limit(limit);
       return rows;
     }
-    const rows = await (
-      await db
-    )
+    const rows = await db()
       .select()
       .from(channel)
       .orderBy(asc(channel.name))
@@ -116,7 +112,7 @@ export const QUERIES = {
     return rows;
   },
   getChannelById: async function (channelId: string): Promise<Channel | null> {
-    const rawchannel = await (await db)
+    const rawchannel = await db()
       .select()
       .from(channel)
       .where(eq(channel.id, channelId));
@@ -129,7 +125,7 @@ export const QUERIES = {
   getSummarisedVideoByYouTubeId: async function (
     videoYouTubeId: string
   ): Promise<SummarisedVideo | null> {
-    const rawvideo = await (await db)
+    const rawvideo = await db()
       .select()
       .from(video)
       .where(eq(video.videoId, videoYouTubeId));

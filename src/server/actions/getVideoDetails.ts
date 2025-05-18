@@ -34,7 +34,7 @@ export async function getYouTubeVideoDetails(
   videoId: string
 ): Promise<VideoDetails | null> {
   try {
-    const { env } = await getCloudflareContext({ async: true });
+    const { env } = getCloudflareContext();
     const apiKey = env.YOUTUBE_SEARCH_API_KEY;
 
     const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`;

@@ -1,12 +1,9 @@
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "./schema";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { cache } from "react";
 
-export const runtime = "edge";
-
-export async function initDbConnection() {
-  const { env } = await getCloudflareContext({ async: true });
+export const db = cache(() => {
+  const { env } = getCloudflareContext();
   return drizzle(env.DB, { schema });
-}
-
-export const db = initDbConnection();
+});

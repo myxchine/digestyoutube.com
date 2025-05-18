@@ -44,7 +44,7 @@ export async function getAiSummary({
   videoTitle: string;
   channelName: string;
 }): Promise<SummaryObject | null> {
-  const apiKey = (await getCloudflareContext({ async: true })).env
+  const apiKey = getCloudflareContext().env
     .GEMINI_API_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({

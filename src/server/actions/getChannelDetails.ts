@@ -29,8 +29,7 @@ export async function getYouTubeChannelImageUrl(
   channelId: string
 ): Promise<string | null> {
   try {
-    const { env } = await getCloudflareContext({ async: true });
-    const apiKey = env.YOUTUBE_SEARCH_API_KEY;
+    const apiKey = getCloudflareContext().env.YOUTUBE_SEARCH_API_KEY;
 
     const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${apiKey}`;
     const response = await fetch(url);
